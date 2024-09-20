@@ -1,6 +1,6 @@
 variables:
   GIT_STRATEGY: clone
-  REGISTRY: cr.yandex/crpmmm1ugaibpaqr61te/programming-1-2023-2024
+  REGISTRY: cr.yandex/crpmmm1ugaibpaqr61te/programming-1-2024-2025
 
 grade:
   image: $REGISTRY/base:latest
