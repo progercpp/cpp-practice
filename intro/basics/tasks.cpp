@@ -46,9 +46,9 @@ int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt
 			if ((1 << j) & i) {
 				cnt_bits++;
 			}
-			if (cnt_bits == bitsCnt) {
+		}
+		if (cnt_bits == bitsCnt) {
 				cnt++;
-			}
 		}
 	}
 	return cnt;
