@@ -1,4 +1,4 @@
-Домашние задачи для курса МИФИ "Введение в программирование, часть 1" для студентов 2023-2024 года поступления.
+Домашние задачи для курса МИФИ "Введение в программирование, часть 1" для студентов 2024-2025 года поступления.
 
 ## Настройка окружения
 
@@ -12,7 +12,7 @@
 
 Для локального тестирования достаточно собрать проект, состоящий из всех файлов в папке, и запустить скомпилированный main. В этом может помочь IDE CLion или VSCode.
 
-Однако в тестирующей системе тесты запускаются иначе. Используется ОС Linux, g++ компилятор и makefile тулза. Если есть желание воспроизвести запуск как в тестирующей системе, можно воспользоваться [WSL](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-clion.html). Гайд для установки WSL: https://gitlab.manytask.org/mephi-dap-programming-1/public-2023-2024/-/blob/main/docs/wsl.pdf
+Однако в тестирующей системе тесты запускаются иначе. Используется ОС Linux, g++ компилятор и makefile тулза. Если есть желание воспроизвести запуск как в тестирующей системе, можно воспользоваться [WSL](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-clion.html). Гайд для установки WSL: https://gitlab.manytask.org/mephi-dap-programming-1/public-2024-2025/-/blob/main/docs/wsl.pdf
 
 ## Клонируем репозиторий
 
@@ -23,7 +23,7 @@ $ cd <выбранная директория>
 
 # Клонируем свой репозиторий, который создается автоматически при регистрации на manytask.
 # Имя репозитория доступно по ссылке "MY REPO" на mephi-dap.manytask.org.
-$ git clone https://gitlab.manytask.org/mephi-dap-programming-1/students-2023-2024/<ваш login с mephi-dap.manytask.org>.git
+$ git clone https://gitlab.manytask.org/mephi-dap-programming-1/students-2024-2025/<ваш login с mephi-dap.manytask.org>.git
 
 # Переходим в директорию склонированного репозитория.
 $ cd <ваш репозиторий>
@@ -36,12 +36,12 @@ $ git config --local user.email "<ваш email с mephi-dap.manytask.org>"
 $ git config --local pull.rebase true
 
 # Настраиваем возможность получать обновления при появлении новых задач.
-$ git remote add upstream https://gitlab.manytask.org/mephi-dap-programming-1/public-2023-2024.git
+$ git remote add upstream https://gitlab.manytask.org/mephi-dap-programming-1/public-2024-2025.git
 ```
 
 ## Подтягиваем новые задачи
 
-Периодически необходимо подтягивать изменения из основного репозитория с задачками: https://gitlab.manytask.org/mephi-dap-programming-1/public-2023-2024. Например, когда появляются новые задачки или меняются условия старых.
+Периодически необходимо подтягивать изменения из основного репозитория с задачками: https://gitlab.manytask.org/mephi-dap-programming-1/public-2024-2025. Например, когда появляются новые задачки или меняются условия старых.
 
 ```bash
 $ git pull upstream main
@@ -88,10 +88,10 @@ $ make
 ```bash
 $ git add <измененный файл>
 $ git commit -m "<комментарий, описывающий изменения>"
-$ git push origin main
+$ git push origin master
 ```
 
-Процесс проверки автоматизирован, результаты проверки можно увидеть либо в CI/CD коммита (зеленая/красная/желтая галочка напротив коммита), либо во вкладках SUBMITS и GDOC главной страницы курса https://mephi-dap.manytask.org/.
+Процесс проверки автоматизирован, результаты проверки можно увидеть либо в CI/CD коммита (зеленая/красная/желтая галочка напротив коммита), либо во вкладках SUBMITS и GDOC главной страницы курса https://mephi-dap-prog.manytask.org/.
 
 Закрытых тестов в задачах нет, все тесты публичные и доступны в main.cpp. Сообщения, записанные в консоль в процессе тестирования, можно увидеть в результатах проверки.
 
