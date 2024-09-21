@@ -42,7 +42,7 @@ int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt
 	int cnt = 0;
 	for (int i = from; i <= to; ++i) {
 		int cnt_bits = 0;
-		for (int j = 0; j < 32; ++j) {
+		for (int j = 0; j < 31; ++j) {
 			if ((1 << j) & i) {
 				cnt_bits++;
 			}
@@ -55,7 +55,7 @@ int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt
 }
 
 double NMath::ComputeMathFormula(const double arg) {
-	return abs((sin(arg) / 2 + cos(arg)) * (sin(arg) / 2 + cos(arg)) + tan(arg) * atan(arg));
+	return std::abs((std::sin(arg) / 2.0 + std::cos(arg)) * (std::sin(arg) / 2.0 + std::cos(arg)) + std::tan(arg) * std::atan(arg));
 }
 
 bool NMath::IsPositive(int arg) {
@@ -64,7 +64,7 @@ bool NMath::IsPositive(int arg) {
 
 int NRecursion::CalculateFibonacci(const int arg) {
 	int f1 = 1, f2 = 1;
-	for (int i = 2; i <= arg; ++i) {
+	for (int i = 3; i <= arg; ++i) {
 		int sm = f1 + f2;
 		f1 = f2;
 		f2 = sm;
