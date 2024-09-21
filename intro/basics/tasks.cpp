@@ -3,18 +3,23 @@
 #include <cmath>
 
 int NOuter::NInner::DoSomething(int lhs, int rhs) {
+	return lhs + rhs;
 }
 
 int NOuter::DoSomething(int lhs, int rhs) {
+	return lhs - rhs;
 }
 
 int NOverload::ProcessTwoArgs(int lhs, int rhs) {
+	return lhs + rhs;
 }
 
 char NOverload::ProcessTwoArgs(char lhs, char rhs) {
+	return max(lhs, rhs);
 }
 
 int NOverload::ProcessTwoArgs(int lhs, char rhs) {
+	return lhs - rhs;
 }
 
 unsigned int NOverflow::WithOverflow(int lhs, int rhs) {
