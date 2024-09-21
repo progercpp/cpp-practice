@@ -23,12 +23,19 @@ int NOverload::ProcessTwoArgs(int lhs, char rhs) {
 }
 
 unsigned int NOverflow::WithOverflow(int lhs, int rhs) {
+	return (unsigned int)lhs + (unsigned int)rhs;
 }
 
 uint64_t NOverflow::WithOverflow(int64_t lhs, int64_t rhs) {
+	return (uint64_t) lhs - rhs;
 }
 
 int NLoop::SumInRange(const int lhs, const int rhs) {
+	int sm = 0;
+	for (int i = lhs; i < rhs; ++i) {
+		sm += i;
+	}
+	return sm;
 }
 
 int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt) {
