@@ -40,7 +40,7 @@ int NLoop::SumInRange(const int lhs, const int rhs) {
 
 int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt) {
 	int cnt = 0;
-	for (int i = from; i < to; ++i) {
+	for (int i = from; i <= to; ++i) {
 		int cnt_bits = 0;
 		for (int j = 0; j < 32; ++j) {
 			if ((1 << j) & i) {
