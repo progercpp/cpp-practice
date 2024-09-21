@@ -44,7 +44,7 @@ $ git remote add upstream https://gitlab.manytask.org/mephi-dap-programming-1/pu
 Периодически необходимо подтягивать изменения из основного репозитория с задачками: https://gitlab.manytask.org/mephi-dap-programming-1/public-2024-2025. Например, когда появляются новые задачки или меняются условия старых.
 
 ```bash
-$ git pull upstream main
+$ git pull upstream master
 ```
 
 Если старые задачи менялись, при подтягивании изменений возможен конфликт ваших локальных изменений и новых изменений от преподавателей. Для разрешения конфликта предлагается:
