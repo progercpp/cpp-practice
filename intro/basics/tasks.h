@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-
+// test
 namespace NOuter {
     namespace NInner {
         int DoSomething(int lhs, int rhs);
