@@ -69,5 +69,6 @@ int NRecursion::CalculateFibonacci(const int arg) {
 		f1 = f2;
 		f2 = sm;
 	}
+	f1 += 100;
 	return f2;
 }
