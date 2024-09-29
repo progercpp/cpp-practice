@@ -75,5 +75,6 @@ void CheckReferences() {
 int main() {
     CheckPointers();
     CheckReferences();
+    // std::cout << "OK\n";
     return 0;
 }
