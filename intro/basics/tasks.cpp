@@ -1,76 +1,75 @@
 #include "tasks.h"
-#include <vector>
+
 #include <cmath>
 
 int NOuter::NInner::DoSomething(int lhs, int rhs) {
-	return (lhs + rhs);
+	return lhs + rhs;
 }
 
 int NOuter::DoSomething(int lhs, int rhs) {
-	return (lhs - rhs);
+	return lhs - rhs;
 }
 
 int NOverload::ProcessTwoArgs(int lhs, int rhs) {
-	return (lhs + rhs);
+	return lhs + rhs;
 }
 
 char NOverload::ProcessTwoArgs(char lhs, char rhs) {
-	return (std::max(lhs, rhs));
-}  
+	return (lhs > rhs? lhs : rhs);
+}
 
 int NOverload::ProcessTwoArgs(int lhs, char rhs) {
-	return (std::abs(lhs-rhs)) ;
+	return lhs - rhs;
 }
 
 unsigned int NOverflow::WithOverflow(int lhs, int rhs) {
-	return (lhs + rhs);
+	return (unsigned int)lhs + (unsigned int)rhs;
 }
 
 uint64_t NOverflow::WithOverflow(int64_t lhs, int64_t rhs) {
-	return (std::abs(lhs - rhs));
+	return (uint64_t)lhs - (uint64_t) rhs;
 }
 
 int NLoop::SumInRange(const int lhs, const int rhs) {
-	return((lhs + rhs - 1) * (rhs - lhs) / 2);
+	int sm = 0;
+	for (int i = lhs; i < rhs; ++i) {
+		sm += i;
+	}
+	return sm;
 }
 
 int NLoop::CountFixedBitsInRange(const int from, const int to, const int bitsCnt) {
-	int k = 0;
-	for (int n = from; n <= to; n++) {
-		int s = 0;
-		while (n > 0) {
-			if (n % 2 == 1) {
-				s += 1;
+	int cnt = 0;
+	for (int i = from; i <= to; ++i) {
+		int cnt_bits = 0;
+		for (int j = 0; j < 31; ++j) {
+			if ((1 << j) & i) {
+				cnt_bits++;
 			}
-			n = n / 2;
 		}
-		if (s == bitsCnt) {
-			k++;
+		if (cnt_bits == bitsCnt) {
+				cnt++;
 		}
 	}
-	return k;
+	return cnt;
 }
 
 double NMath::ComputeMathFormula(const double arg) {
-	return (std::abs((sin(arg) / 2 + cos(arg)) * (sin(arg) / 2 + cos(arg)) + tan(arg) * atan(arg)));
+	return std::abs((std::sin(arg) / 2.0 + std::cos(arg)) * (std::sin(arg) / 2.0 + std::cos(arg)) + std::tan(arg) * std::atan(arg));
 }
 
 bool NMath::IsPositive(int arg) {
-	bool r = (arg > 0);
-	return (r);
+	return arg > 0;
 }
 
 int NRecursion::CalculateFibonacci(const int arg) {
-	std::vector <int> a(arg);
-	a[1] = 1;
-	a[2] = 1;
+	int f1 = 1, f2 = 1;
 	for (int i = 3; i <= arg; ++i) {
-		a[i] = a[i - 1] + a[i - 2];
+		int sm = f1 + f2;
+		f1 = f2;
+		f2 = sm;
 	}
-<<<<<<< HEAD
 	f1 += 100;
 	return f2;
-=======
-	return (a[arg]);
->>>>>>> 39c4e8d (Last part of first homework)
 }
+
