@@ -15,7 +15,7 @@ T max(T a, T b) {
 void NPointers::Increment(int *x) {
     *x = *x + 1;
 }
-
+ 
 int NPointers::Multiply(int a, int b, bool* flag) {
     int res = a * b;
     *flag = !((res / a == b && res % a == 0) && (res / b == a && res % b == 0));
