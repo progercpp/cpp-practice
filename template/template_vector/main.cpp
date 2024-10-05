@@ -58,9 +58,9 @@ void TestImplementation(const initializer_list<T>& il, const initializer_list<pa
     AssertEqual(arr1, arr2);
     assert(arr1 == arr2);
 
-    sort(&arr1[0], &arr1[arr1.Size()]);
+    sort(&arr1[0], &arr1[0] + arr1.Size());
     assert(arr1 < arr2);
-    sort(&arr1[0], &arr1[arr1.Size()], greater<T>());
+    sort(&arr1[0], &arr1[0] + arr1.Size(), greater<T>());
     assert(arr1 > arr2);
 
     size_t insertedCount = 0;
