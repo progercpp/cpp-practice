@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <string>
 #include <stdint.h>
+#include "nuclear/nuclear.h"
 
 using namespace std;
 
@@ -83,11 +84,10 @@ void TestImplementation(const initializer_list<T>& il, const initializer_list<pa
     assert(arr1.Size() == oldSize - 1);
 }
 
-int main() {
+void ::nuclear::RunTests() {
     TestImplementation({1, 5, 4, 6, 2, 8}, {{10, 0}, {15, 7}});
     TestImplementation<uint16_t>({1, 5, 4, 6, 2, 8}, {{10, 0}, {15, 7}});
     TestImplementation({1.0f, 5.0f, 4.0f, 6.0f, 2.5f, 8.6f}, {{10.1f, 0}, {15.1f, 7}});
     TestImplementation({1.0, 5.0, 4.0, 6.0, 2.5, 8.6}, {{10.0, 0}, {15.7, 7}});
     TestImplementation<string>({"Ayo", "Ehey", "Doo", "Foo", "Boo", "Hello"}, {{"Ja", 0}, {"Question", 7}});
-    return 0;
 }

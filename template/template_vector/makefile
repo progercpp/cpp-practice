@@ -1,3 +1,6 @@
+CONTRIB = ../../contrib
+NUCLEAR = $(CONTRIB)/nuclear
+
 SOURCES := $(wildcard *.cpp)
 RESULT := main
 SCRIPTS := $(wildcard *.sh)
@@ -14,7 +17,7 @@ ifneq ($(USER_OS), Darwin)
 endif
 
 OBJECTS := $(SOURCES:.cpp=.o)
-CFLAGS := -g -fsanitize=address -std=c++20 -Wall -Werror
+CFLAGS := -g -fsanitize=address -std=c++20 -Wall -Werror -I $(CONTRIB)
 LDFLAGS := -fsanitize=address
 
 all: run
@@ -30,9 +33,11 @@ compile: $(SOURCES) $(RESULT) $(SCRIPT_TARGETS)
 .cpp.o: $(wildcard *.h)
 	g++ -c $(CFLAGS) $< -o $@
 
-$(RESULT): $(OBJECTS)
-	g++ $(OBJECTS) $(LDFLAGS) -o $(RESULT)
+$(RESULT): $(OBJECTS) libnuclear
+	g++ $(OBJECTS) $(LDFLAGS) -L$(NUCLEAR) -lnuclear -o $(RESULT)
+
+libnuclear:
+	cd $(NUCLEAR) && $(MAKE) compile
 
 clean:
 	rm -f $(OBJECTS) $(RESULT)
-
