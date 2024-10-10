@@ -11,14 +11,14 @@ void CheckOutputOperator() {
 
     getline(out, ans);
     assert(ans == "Constructed with default. Result Array's capacity is 10 and size is 5, elements are: 5, 5, 5, 5, 5");
-
+    
     out << a << "\n";
     getline(out, ans);
     assert(ans == "Result Array's capacity is 10 and size is 5, elements are: 5, 5, 5, 5, 5");
 }
 
 void CheckDefaultConstructor() {
-    std::stringstream out;
+    std::stringstream out;  
     std::string ans;
 
     {
