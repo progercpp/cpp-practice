@@ -71,21 +71,22 @@ public:
             delete[] data_;
             data_ = newData;
             capacity_ = newCapacity;
-            delete[] newData;
         }
     }
     void Resize(size_t newSize) {
         if (capacity_ < newSize) {
             int* newData = new int[newSize];
-            for (size_t i = 0; i < min(newSize, size_); ++i) {
-                newData[i] = data_[i];
+            for (size_t i = 0; i < newSize; ++i) {
+                if (i < size_) {
+                    newData[i] = data_[i];
+                } else {
+                    newData[i] = 0;
+                }
             }
             delete[] data_;
             data_ = newData;
-            delete[] newData;
         }
         size_ = newSize;
-        // capacity_ = newSize;
         capacity_ = max(capacity_, newSize);
     }
     void PopBack() {
@@ -108,10 +109,6 @@ public:
     }
     
     void PrintElements(std::ostream& out) {
-        if  (size_ <= 0) {
-            std::cout << "OK\n"; std::cout.flush();
-            return;
-        }
         if (size_ >= 1) {
             for (size_t i = 0; i < size_ - 1; ++i) {
                 out << data_[i] << ", ";
@@ -239,21 +236,11 @@ public:
         }
         delete[] data_;
         data_ = newData;
-        delete[] newData;
         size_ += it.size_;
         capacity_ = size_;
         return *this;
     }
 
-    // friend std::ostream& operator<<(std::ostream& ostream, const Array& array) {
-    //     ostream << "Result Array's capacity is " << array.capacity_ << " and size is " << array.size_ << ", elements are: ";
-    //     for (size_t i = 0; i < array.size_ - 1; ++i) {
-    //         ostream << array.data_[i] << ", ";
-    //     }
-    //     if (array.size_ >= 1) ostream << array.data_[array.size_ - 1];
-    //     ostream << "\n";
-    //     return ostream;
-    // }
     friend std::ostream& operator<<(std::ostream& ostream, const Array& array) {
         ostream << "Result Array's capacity is " << array.capacity_ << " and size is " << array.size_;
         if (array.size_ >= 1) {
