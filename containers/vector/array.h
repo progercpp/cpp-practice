@@ -21,7 +21,6 @@ public:
         size_ = 0;
         capacity_ = 2;
         data_ = new int[2];
-        // Ostream_.clear();
         Ostream_ << "Constructed. Result Array's capacity is " << capacity_ << " and size is " << size_ << '\n';
     };
     Array(const Array& array) : Ostream_(array.Ostream_) {
@@ -117,7 +116,6 @@ public:
         }
     }
     void Copy(const Array &other) {
-        delete[] data_;
         capacity_ = other.capacity_;
         size_ = other.size_;
 
@@ -255,6 +253,6 @@ public:
 
 private:
     std::ostream& Ostream_;
-    int *data_ = new int[2];
+    int *data_;
     size_t capacity_ = 2, size_ = 0;
 };
