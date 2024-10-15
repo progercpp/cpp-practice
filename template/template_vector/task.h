@@ -35,7 +35,7 @@ public:
         }
         Ostream_ << '\n';
     }
-    Array(size_t size, std::ostream& ostream = std::cout, T defaultValue = 0) : Ostream_(ostream) {
+    Array(size_t size, std::ostream& ostream = std::cout, T defaultValue) : Ostream_(ostream) {
         size_ = size;
         if (size == 0) {
             capacity_ = 2;
@@ -82,7 +82,7 @@ public:
                 if (i < size_) {
                     newData[i] = data_[i];
                 } else {
-                    newData[i] = 0;
+                    // newData[i] = 0;
                 }
             }
             delete[] data_;
@@ -96,7 +96,7 @@ public:
             size_--;
         }
     }
-    void PushBack(T value = 0) {
+    void PushBack(T value) {
         if (size_ == capacity_) {
             capacity_ *= 2;
             T* newData = new T[capacity_];
@@ -274,6 +274,7 @@ public:
         for (size_t i = pos; i < size_ - 1; ++i) {
             data_[i] = data_[i + 1];
         }
+        size_--;
         return true;
     }
 
