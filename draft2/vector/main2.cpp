@@ -11,14 +11,14 @@ void CheckOutputOperator() {
 
     getline(out, ans);
     assert(ans == "Constructed with default. Result Array's capacity is 10 and size is 5, elements are: 5, 5, 5, 5, 5");
-
+    
     out << a << "\n";
     getline(out, ans);
     assert(ans == "Result Array's capacity is 10 and size is 5, elements are: 5, 5, 5, 5, 5");
 }
 
 void CheckDefaultConstructor() {
-    std::stringstream out;
+    std::stringstream out;  
     std::string ans;
 
     {
@@ -71,9 +71,12 @@ void CheckCopyConstructorWithResize() {
         for (int i = 9; i >= 0; --i) {
             array[i] = 9 - i;
         }
-
+        out << array;
+        // getline(out, ans);
+        // std::cout << "info about array: " << ans << "\n";
         Array other = Array(array);
         getline(out, ans);
+        std::cout << "info about other: " << ans << "\n";
         assert(ans == "Constructed from another Array. Result Array's capacity is 10 and size is 10, elements are: 9, 8, 7, 6, 5, 4, 3, 2, 1, 0");
 
         out << array << "\n";

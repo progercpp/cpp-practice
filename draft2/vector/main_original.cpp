@@ -1,4 +1,4 @@
-#include "array.h"
+#include "array2.h"
 
 #include <cassert>
 #include <sstream>
