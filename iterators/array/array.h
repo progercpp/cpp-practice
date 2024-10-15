@@ -21,6 +21,117 @@ T max(T a, T b) {
 template<class T>
 class Array {
 public:
+
+    class RandomAccessIterator {
+    public:
+        using iterator_category = std::random_access_iterator_tag;
+        using value_type = T;
+        using pointer = T*;
+        using difference_type = ptrdiff_t;
+        using reference = T&;
+        
+        explicit RandomAccessIterator(T* ptr = *T()) : ptr_(ptr) {}
+        T& operator*() const {
+            return *ptr_;
+        }
+        T* operator->() {
+            return ptr_;
+        }
+        const T* operator->() const {
+            return ptr_;
+        }
+
+        RandomAccessIterator& operator++() {
+            // RandomAccessIterator prev = *this;
+            ptr_++;
+            return *this;
+        }
+        RandomAccessIterator& operator--() {
+            ptr_--;
+            return *this;
+        }
+        // RandomAccessIterator& operator++(int) {
+        //     ++ptr_;
+        //     return this;
+        // }
+        // RandomAccessIterator& operator--(int) {
+        //     --ptr_;
+        //     return this;
+        // }
+
+        bool operator<(const RandomAccessIterator& other) const {
+            return ptr_ < other.ptr_;
+        }
+        bool operator<=(const RandomAccessIterator& other) const {
+            return ptr_ <= other.ptr_;
+        }
+        bool operator>(const RandomAccessIterator& other) const {
+            return ptr_ > other.ptr_;
+        }
+        bool operator==(const RandomAccessIterator& other) const {
+            return ptr_ == other.ptr_;
+        }
+        bool operator!=(const RandomAccessIterator& other) const {
+            return ptr_ != other.ptr_;
+        }
+
+        T& operator[] (int index) {
+            return *(ptr_ + index);
+        }
+        T& operator[] (const int index) const{
+            return *(ptr_ + index);
+        }
+        // T operator[] (int index) {
+        //     return *(ptr_ + index);
+        // }
+
+        
+        RandomAccessIterator operator+(int value) const {
+            return RandomAccessIterator(ptr_ + value);
+        }
+        // RandomAccessIterator operator-(const int value) const {
+        //     return RandomAccessIterator(ptr_ - value);
+        // }
+        RandomAccessIterator operator-(int value) const {
+            return RandomAccessIterator(ptr_ - value);
+        }
+        RandomAccessIterator& operator+=(const int value) {
+            ptr_ += value;
+            return *this;
+        }
+        RandomAccessIterator& operator-=(const int value) {
+            ptr_ -= value;
+            return *this;
+        }
+
+        int operator-(const RandomAccessIterator other) const {
+            return int(ptr_ - other.ptr_);
+        }
+        int operator-(RandomAccessIterator other) {
+            return int(ptr_ - other.ptr_);
+        }
+        
+        friend RandomAccessIterator operator+(const int value,  RandomAccessIterator other) {
+            return RandomAccessIterator(value + other.ptr_);
+        }
+    
+    private:
+        T* ptr_ = nullptr;
+    };
+
+    RandomAccessIterator begin() {
+        return RandomAccessIterator(data_);
+    }
+     RandomAccessIterator begin() const {
+        return RandomAccessIterator(data_);
+    }
+    RandomAccessIterator end() {
+        return RandomAccessIterator(data_ + size_);
+    }
+     RandomAccessIterator end() const {
+        return RandomAccessIterator(data_ + size_);
+    }
+
     Array(std::ostream& ostream) : Ostream_(ostream) {
         size_ = 0;
         capacity_ = 2;
@@ -290,15 +401,13 @@ public:
         }
         return ostream;
     }
-    auto begin() {
-        return data_;
-    }
-    auto begin() {
-        return data_ + capacity_;
-    }
 
 private:
     std::ostream& Ostream_;
     T *data_;
     size_t capacity_ = 2, size_ = 0;
 };
+
+/*
+lvalue, rvalue
+*/
