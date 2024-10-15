@@ -35,7 +35,7 @@ public:
         }
         Ostream_ << '\n';
     }
-    Array(size_t size, std::ostream& ostream = std::cout, T defaultValue) : Ostream_(ostream) {
+    Array(size_t size, std::ostream& ostream = std::cout, T defaultValue = T()) : Ostream_(ostream) {
         size_ = size;
         if (size == 0) {
             capacity_ = 2;
@@ -96,7 +96,7 @@ public:
             size_--;
         }
     }
-    void PushBack(T value) {
+    void PushBack(T value = T()) {
         if (size_ == capacity_) {
             capacity_ *= 2;
             T* newData = new T[capacity_];
