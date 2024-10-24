@@ -10,11 +10,11 @@ public:
         // std::cout << "start constructor" << std::endl;
         pref.resize(v.size());
         
-        for (int i = 0; i < v.size(); ++i) {
+        for (int i = 0; i < int(v.size()); ++i) {
             if (i == 0) {
-                pref[i] = v[i].size();
+                pref[i] = int(v[i].size());
             } else {
-                pref[i] = pref[i - 1] + v[i].size();
+                pref[i] = pref[i - 1] + int(v[i].size());
             }
         }
         // std::cout << "end constructor" << std::endl;
@@ -171,7 +171,7 @@ public:
         os << "v.size() = " << int(flat_vec.v.size()) << "\n";
         for (int i = 0; i < int(flat_vec.v.size()); ++i) {
             // os << int(flat_vec.v[i].size()) << "\n";
-            for (int j = 0; j < flat_vec.v[i].size(); ++j) {
+            for (int j = 0; j < int(flat_vec.v[i].size()); ++j) {
                 os << flat_vec.v[i][j] << " ";
             }
             os << "\n";
