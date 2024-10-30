@@ -9,10 +9,10 @@
 
 bool isalpha(unsigned char c) {
     // std::cout << (char) c << " = "<< int(c) << "\n";
-    return 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z';
+    return ('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z');
 }
 
-unsigned char tolower(unsigned char c) {
-    if ('A' <= c && c <= 'Z') return c + 'A' - 'a';
+char tolower(unsigned char c) {
+    if ('A' <= c && c <= 'Z') return c + 'a' - 'A';
     return c;
 }
