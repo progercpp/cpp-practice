@@ -10,9 +10,9 @@
  */
 
 
-bool isalpha_(unsigned char c);
+bool isalpha_(char c);
 
-char tolower_(unsigned char c);
+char tolower_(char c);
 
 bool is_palindrome(const std::string& s);
 
