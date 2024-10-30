@@ -9,4 +9,11 @@
  * Пример палиндрома: "Do geese see God?"
  */
 
+
+bool isalpha_(unsigned char c);
+
+char tolower_(unsigned char c);
+
 bool is_palindrome(const std::string& s);
+
+
