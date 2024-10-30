@@ -1,7 +1,9 @@
 #include <cassert>
+// #include <iostream>
 #include "task.h"
 
 void test_isalpha() {
+    // std::cout << "a = " << 'a' << "\n";
     assert(isalpha('a'));
     assert(isalpha('A'));
     assert(isalpha('c'));
