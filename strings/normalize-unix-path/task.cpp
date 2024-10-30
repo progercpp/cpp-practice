@@ -6,7 +6,7 @@ using namespace std;
 
 string String_viewToString(string_view path) {
     string result = "";
-    for (int i = 0; i < path.length(); ++i) {
+    for (int i = 0; i < int(path.length()); ++i) {
         result.push_back(path[i]);
     }
     return result;
@@ -15,7 +15,7 @@ string String_viewToString(string_view path) {
 void delete_points(string &path) {
     string result = "";
     path += "~~~~";
-    for (int i = 0; i < path.length() - 2 && path[i] != '~'; ++i) {
+    for (int i = 0; i < int(path.length()) - 2 && path[i] != '~'; ++i) {
         if (path[i] == '/' && path[i + 1] == '.' && path[i + 2] != '.') {
             i++;
             continue;
@@ -28,10 +28,10 @@ void delete_points(string &path) {
 void delete_slash(string &path) {
     if (path != "/" && path.back() == '/') path.pop_back();
     string nw_path = "";
-    for (int i = 0; i < path.length() - 1; ++i) {
+    for (int i = 0; i < int(path.length()) - 1; ++i) {
         nw_path.push_back(path[i]);
         if (path[i] == '/') {
-            while (i < path.length() - 1 && path[i + 1] == '/') i++;
+            while (i < int(path.length()) - 1 && path[i + 1] == '/') i++;
         }
     }
     nw_path.push_back(path.back());
@@ -73,7 +73,7 @@ string normalize(string_view path_) {
     if (path[0] == '/') {
         string command = "";
         string catalog = "/";
-        for (int i = 1; i < path.length(); ++i) {
+        for (int i = 1; i < int(path.length()); ++i) {
             command.push_back(path[i]);
             if (path[i] == '/') {
                 command.pop_back();
@@ -86,7 +86,7 @@ string normalize(string_view path_) {
         string pref = "";
         bool flag = path[0] != '.' && path[0] != '/';
         string nw_path = "";
-        for (int i = 0; i < path.length(); ++i) {
+        for (int i = 0; i < int(path.length()); ++i) {
 
             if (!flag) {
                 pref.push_back(path[i]);
@@ -101,7 +101,7 @@ string normalize(string_view path_) {
         path = "/" + nw_path;
         string command = "";
         string catalog = "/";
-        for (int i = 1; i < path.length(); ++i) {
+        for (int i = 1; i < int(path.length()); ++i) {
             command.push_back(path[i]);
             if (path[i] == '/') {
                 command.pop_back();
