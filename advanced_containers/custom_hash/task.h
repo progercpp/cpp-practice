@@ -12,6 +12,22 @@ struct SuperKey {
     }
 };
 
+template<>
+struct std::hash<SuperKey> {
+    const int MOD = 1e9;
+    size_t operator() (const SuperKey& sk) const {
+        size_t hash_int = (sk.IntPart + MOD) % MOD;
+        size_t hash_float = (sk.FloatPart);
+        size_t hash_string = 0;
+        for (char c : sk.StrPart) {
+            hash_string *= 255;
+            hash_string += c;
+            hash_string %= MOD;
+        }
+        return (hash_int + hash_float + hash_string) % MOD;
+    }
+};
+
 /*
  * Напишите хэш-функцию, реализовав специализацию шаблона std::hash для типа SuperKey
  * Напишите функцию PopulateHashMap, которая добавляет в hashMap пары ключ-значение из данного вектора toAdd
@@ -20,4 +36,3 @@ void PopulateHashMap(
     std::unordered_map<SuperKey, std::string>& hashMap,
     const std::vector<std::pair<SuperKey, std::string>>& toAdd
 );
-
