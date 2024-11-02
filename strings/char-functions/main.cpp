@@ -13,6 +13,9 @@ void test_isalpha() {
     assert(!isalpha('5'));
     assert(!isalpha('\n'));
     assert(!isalpha(' '));
+
+    assert(!isalpha('['));
+    assert(!isalpha('^'));
 }
 
 void test_tolower() {
@@ -24,6 +27,11 @@ void test_tolower() {
     assert(tolower('\n') == '\n');
     assert(tolower('Z') == 'z');
     assert(tolower('z') == 'z');
+
+    assert(tolower('`') == '`');
+    assert(tolower('[') == '[');
+    assert(tolower(']') == ']');
+    assert(tolower('^') == '^');
 }
 
 int main() {
