@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iterator>
 #include <iostream>
+#include <cstdint>
 
 template<class InputIt, class OutputIt, class UnaryOperation>
 void Transform(InputIt firstIn, InputIt lastIn, OutputIt firstOut, UnaryOperation op) {
