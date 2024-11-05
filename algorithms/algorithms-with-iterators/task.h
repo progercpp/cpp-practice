@@ -53,12 +53,6 @@ void Merge(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2, Out
     }
 }
 
-
-/*
- * Напишите класс "диапазон чисел Фибоначчи"
- * Экземпляр класса представляет из себя диапазон от первого до N-го числа Фибоначчи (1, 2, 3, 5, 8, 13 и т.д.)
- * С помощью функций begin и end можно получить итераторы и пробежать по диапазону или передать их в STL-алгоритмы
- */
 class FibonacciRange {
 public:
 
@@ -71,33 +65,62 @@ public:
         using reference = value_type&;
         using iterator_category = std::input_iterator_tag;
 
+        Iterator(uint64_t* ptr) : ptr_(ptr) {}
+
         value_type operator *() const {
+            return *ptr_;
             // разыменование итератора -- доступ к значению
         }
 
         Iterator& operator ++() {
             // prefix increment
+            ++ptr_;
+            return *this;
         }
 
         Iterator operator ++(int) {
             // postfix increment
+            auto copy = *this;
+            ++ptr_;
+            return copy;
         }
 
         bool operator ==(const Iterator& rhs) const {
+            return this->ptr_ == rhs.ptr_;
+        }
+        bool operator !=(const Iterator& rhs) const {
+            return this->ptr_ != rhs.ptr_;
         }
 
         bool operator <(const Iterator& rhs) const {
+            return this->ptr_ < rhs.ptr_;
         }
+    private:
+        uint64_t* ptr_ = nullptr;
     };
 
-    FibonacciRange(size_t amount) {}
+    FibonacciRange(size_t amount) : n(amount) {
+        data_ = new uint64_t[n + 1];
+        data_[0] = 1;
+        data_[1] = 1;
+        for (size_t i = 2; i <= n; ++i) {
+            data_[i] = data_[i - 1] + data_[i - 2];
+        }
+    }
 
     Iterator begin() const {
+        return Iterator(data_ + static_cast<uint64_t>(1));
     }
 
     Iterator end() const {
+        return (data_ + static_cast<uint64_t>(n + 1));
     }
 
     size_t size() const {
+        return n;
     }
+
+private:
+    size_t n;
+    uint64_t* data_;
 };
