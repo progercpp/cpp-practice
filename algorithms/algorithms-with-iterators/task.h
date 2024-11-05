@@ -107,6 +107,9 @@ public:
             data_[i] = data_[i - 1] + data_[i - 2];
         }
     }
+    ~FibonacciRange() {
+        delete[] data_;
+    }
 
     Iterator begin() const {
         return Iterator(data_ + static_cast<uint64_t>(1));
