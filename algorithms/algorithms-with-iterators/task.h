@@ -59,13 +59,13 @@ public:
     class Iterator {
         friend class FibonacciRange;
     public:
-        using value_type = uint64_t;
+        using value_type = int;
         using difference_type = ptrdiff_t;
         using pointer = value_type*;
         using reference = value_type&;
         using iterator_category = std::input_iterator_tag;
 
-        Iterator(uint64_t* ptr) : ptr_(ptr) {}
+        Iterator(int* ptr) : ptr_(ptr) {}
 
         value_type operator *() const {
             return *ptr_;
@@ -96,11 +96,11 @@ public:
             return this->ptr_ < rhs.ptr_;
         }
     private:
-        uint64_t* ptr_ = nullptr;
+        int* ptr_ = nullptr;
     };
 
     FibonacciRange(size_t amount) : n(amount) {
-        data_ = new uint64_t[n + 1];
+        data_ = new int[n + 1];
         data_[0] = 1;
         data_[1] = 1;
         for (size_t i = 2; i <= n; ++i) {
@@ -109,11 +109,11 @@ public:
     }
 
     Iterator begin() const {
-        return Iterator(data_ + static_cast<uint64_t>(1));
+        return Iterator(data_ + static_cast<int>(1));
     }
 
     Iterator end() const {
-        return (data_ + static_cast<uint64_t>(n + 1));
+        return (data_ + static_cast<int>(n + 1));
     }
 
     size_t size() const {
@@ -122,5 +122,5 @@ public:
 
 private:
     size_t n;
-    uint64_t* data_;
+    int* data_;
 };
