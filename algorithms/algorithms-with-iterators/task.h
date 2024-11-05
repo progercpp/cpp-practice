@@ -14,7 +14,6 @@ void Transform(InputIt firstIn, InputIt lastIn, OutputIt firstOut, UnaryOperatio
 
 template<class BidirIt, class UnaryPredicate>
 void Partition(BidirIt first, BidirIt last, UnaryPredicate p) {
-    int cnt = 0;
     for (auto iter1 = first; iter1 < last; ++iter1) {
         for (auto iter2 = (iter1 + 1); iter2 < last; ++iter2) {
             if (!p(*iter1) && p(*iter2)) {
