@@ -39,6 +39,15 @@ public:
     
 
     void update() {
+        // чистим старые версии
+        while (true) {
+            std::pair<int, K> last = pq.top();
+            if (last_input[last.second] != last.first) {
+                pq.pop();
+            } else {
+                break;
+            }
+        }
         while (um.size() > max_size_) {
             std::pair<int, K> last = pq.top();
             if (last_input[last.second] == last.first) {
@@ -66,5 +75,3 @@ private:
     std::priority_queue<std::pair<int, K>, std::vector<std::pair<int, K>>, CustomComparator<K>> pq;
     int t;
 };
-
-// std::priority_queue<std::pair<int, K>, std::vector<std::pair<int, K>>, [](std::pair<int, K> a, std::pair<int, K> b) {return a.first < b.first;}> pq;
