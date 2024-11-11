@@ -16,10 +16,10 @@ public:
     
     void Put(const K& key, const V& value) {
         t++;
-        pq.push({t, key});
+        pq.emplace(t, key);
         last_input[key] = t;
         um[key] = value;
-        update();
+        if (max_size_ < 100 && um.size() == max_size_ + 1) update();
     }
 
     bool Get(const K& key, V* value) {
@@ -28,32 +28,38 @@ public:
             return false;
         }
         t++;
-        pq.push({t, key});
+        pq.emplace(t, key);
         last_input[key] = t;
         *value = um[key];
-        // std::cout << "value = " << *value << "\n";
-        update();
+        // clear_pq();
         return true;
     }
     
-
-    void update() {
-        // чистим старые версии
-        while (true) {
-            std::pair<int, K> last = pq.top();
-            if (last_input[last.second] != last.first) {
-                pq.pop();
-            } else {
-                break;
-            }
+    void inline clear_pq() {
+        // удаляем старую версию
+        std::pair<int, K> last = pq.top();
+        if (last_input[last.second] != last.first) {
+            pq.pop();
         }
-        while (um.size() > max_size_) {
+        // while (true) {
+        //     std::pair<int, K> last = pq.top();
+        //     if (last_input[last.second] != last.first) {
+        //         pq.pop();
+        //     } else {
+        //         break;
+        //     }
+        //     break;
+        // }
+    }
+    void inline update() {
+        while (um.size() == max_size_ + 1) {
             std::pair<int, K> last = pq.top();
             if (last_input[last.second] == last.first) {
                 um.erase(last.second);
                 last_input.erase(last.second);
             }
             pq.pop();
+            // break;
         }
     }
     void print() {
