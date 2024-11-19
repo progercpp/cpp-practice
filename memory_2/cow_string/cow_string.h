@@ -1,6 +1,13 @@
-#include <iostream>
+// #include <iostream>
+#include <cstddef>
 
-
+template<typename T>
+T min(T a, T b) {
+    if (a < b) {
+        return a;
+    }
+    return b;
+}
 // data
 class State {
 public:
@@ -64,19 +71,19 @@ public:
     }
 
     void Print() {
-        std::cout << "in" << std::endl;
-        std::cout << "ref_count = " << ref_count << "\t"; std::cout.flush();
-        std::cout << "size = " << size << "\t"; std::cout.flush();
-        std::cout << "capacity = " << capacity << "\t"; std::cout.flush();
-        std::cout << "ref_count = " << ref_count << "\tsize = " << size << "\tcapacity = " << capacity << std::endl;
-        std::cout << "s = ";
+        // std::cout << "in" << std::endl;
+        // std::cout << "ref_count = " << ref_count << "\t"; std::cout.flush();
+        // std::cout << "size = " << size << "\t"; std::cout.flush();
+        // std::cout << "capacity = " << capacity << "\t"; std::cout.flush();
+        // std::cout << "ref_count = " << ref_count << "\tsize = " << size << "\tcapacity = " << capacity << std::endl;
+        // std::cout << "s = ";
         for (size_t i = 0; i < size; ++i) {
-            std::cout << data[i];
+            // std::cout << data[i];
         }
-        std::cout << std::endl;
+        // std::cout << std::endl;
     }
     bool IsUnique() {
-        if (ref_count < 1) while (true) std::cout << "ERROR" << std::endl;
+        // if (ref_count < 1) while (true) std::cout << "ERROR" << std::endl;
         return ref_count == 1;
     }
     void DeleteRef() {
@@ -87,7 +94,7 @@ public:
     }
 private:
     void UpdateData(char* nw_data, size_t nw_capacity) {
-        for (size_t i = 0; i < std::min(size, nw_capacity); ++i) {
+        for (size_t i = 0; i < min(size, nw_capacity); ++i) {
             nw_data[i] = data[i];
         }
         delete[] data;
