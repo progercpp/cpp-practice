@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 // data
 class State {
 public:
@@ -119,6 +120,17 @@ public:
         data = other.GiveData();
         return *this;
     }
+    // CowString& operator=(const CowString other) {
+    //     if (this == &other) return *this;
+    //     if (data->IsUnique()) 
+    //         delete data;
+    //     else
+    //         data->DeleteRef();
+    //     // other.GiveData()->AddRef();
+    //     // data = other.GiveData();
+    //     return *this;
+    // }
+
 
     const char& At(size_t index) const {
         return data->At(index);
