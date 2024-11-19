@@ -14,6 +14,7 @@ public:
         other->DeleteRef();
     }
     ~State() {
+        // std::cout << "clear succsessfully" << std::endl;
         delete[] data;
     }
 
@@ -62,7 +63,11 @@ public:
     }
 
     void Print() {
-        std::cout << "ref_count = " << ref_count << std::endl;
+        std::cout << "in" << std::endl;
+        std::cout << "ref_count = " << ref_count << "\t"; std::cout.flush();
+        std::cout << "size = " << size << "\t"; std::cout.flush();
+        std::cout << "capacity = " << capacity << "\t"; std::cout.flush();
+        std::cout << "ref_count = " << ref_count << "\tsize = " << size << "\tcapacity = " << capacity << std::endl;
         std::cout << "s = ";
         for (size_t i = 0; i < size; ++i) {
             std::cout << data[i];
@@ -70,6 +75,7 @@ public:
         std::cout << std::endl;
     }
     bool IsUnique() {
+        if (ref_count < 1) while (true) std::cout << "ERROR" << std::endl;
         return ref_count == 1;
     }
     void DeleteRef() {
@@ -103,9 +109,12 @@ public:
         data = other.GiveData();
         data->AddRef();
     }
-    // copy operator=
     CowString& operator=(CowString& other) {
         if (this == &other) return *this;
+        if (data->IsUnique()) 
+            delete data;
+        else
+            data->DeleteRef();
         other.GiveData()->AddRef();
         data = other.GiveData();
         return *this;
@@ -153,10 +162,11 @@ public:
         }
     }
     ~CowString() {
-        // data->~State();
         // std::cout << "destructor" << std::endl;
         if (data->IsUnique()) {
             // std::cout << "Unique" << std::endl;
+            // delete data;
+            // data->~State();
             delete data;
         } else {
             // std::cout << "a lot of" << std::endl;
@@ -168,6 +178,7 @@ public:
         return data;
     }
     void Print() {
+        // std::cout << "pr" << std::endl;
         data->Print();
     }
 private:
