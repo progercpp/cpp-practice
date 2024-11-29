@@ -1,3 +1,4 @@
+// перед отправкой убрать // в ::build()
 #include "task.h"
 #include "logged_command_wrapper.h"
 #include <iostream>
@@ -71,37 +72,25 @@ public:
         if (editor.HasSelection()) {
             editor.UnselectText();
         }
-        // Находим позицию следующего символа новой строки
         size_t slash_n_right = buffer.find('\n', cursorPosition);
-        
-        // Находим позицию предыдущего символа новой строки
         size_t slash_n_left = buffer.rfind('\n', cursorPosition);
         
         if (slash_n_right == std::string::npos) {
-            // строка и та последняя
+            // последняя строка
             cursorPosition = buffer.size();
             return;
         }
-        
-        // Определяем начало следующей строки
-        size_t nextLineStart = slash_n_right + 1;
+        size_t nxt_line_start = slash_n_right + 1;
+        size_t cur_line_st = (slash_n_left == std::string::npos) ? 0 : slash_n_left + 1;
+        size_t diff = cursorPosition - cur_line_st;
 
-        // Определяем длину текущей строки
-        size_t currentLineStart = (slash_n_left == std::string::npos) ? 0 : slash_n_left + 1;
-        // size_t currentLineLength = slash_n_right - currentLineStart;
+        cursorPosition = nxt_line_start + diff;
 
-        // Определяем смещение курсора относительно начала текущей строки
-        size_t offset = cursorPosition - currentLineStart;
-
-        // Перемещаем курсор в новую строку с сохранением позиции относительно начала строки
-        cursorPosition = nextLineStart + offset;
-
-        // Убедимся, что курсор не выходит за пределы новой строки
-        size_t nextLineEnd = buffer.find('\n', nextLineStart);
-        if (nextLineEnd != std::string::npos) {
-            size_t newLineLength = nextLineEnd - nextLineStart;
-            if (cursorPosition > nextLineStart + newLineLength) {
-                cursorPosition = nextLineStart + newLineLength; // Устанавливаем курсор в конец строки
+        size_t nxt_line_end = buffer.find('\n', nxt_line_start);
+        if (nxt_line_end != std::string::npos) {
+            size_t newLineLength = nxt_line_end - nxt_line_start;
+            if (cursorPosition > nxt_line_start + newLineLength) {
+                cursorPosition = nxt_line_start + newLineLength;
             }
         } else {
             cursorPosition = buffer.size();
@@ -137,7 +126,7 @@ public:
     void Apply(std::string& buffer, size_t& cursorPosition, std::string& clipboard, TextEditor& editor) override {
         if (editor.HasSelection()) {
             // удаляем выделенный текст
-            buffer.erase(editor.GetSelection().first, editor.GetSelection().second - editor.GetSelection().second + 1);
+            buffer.erase(editor.GetSelection().first, editor.GetSelection().second - editor.GetSelection().first);
             cursorPosition = editor.GetSelection().first;
             editor.UnselectText();
         }
@@ -184,7 +173,6 @@ public:
         if (cursorPosition != 0) {
             clipboard = buffer[cursorPosition - 1];
         }
-        std::cout << "clipboard = {" << clipboard << "}\n";
     }
     void AcceptVisitor(CommandVisitor& visitor) override {
         visitor.VisitCopyTextCommand(*this);
@@ -197,11 +185,10 @@ public:
     void Apply(std::string& buffer, size_t& cursorPosition, std::string& clipboard, TextEditor& editor) override {
         if (editor.HasSelection()) {
             // удаляем выделенный текст
-            buffer.erase(editor.GetSelection().first, editor.GetSelection().second - editor.GetSelection().second - 1);
+            buffer.erase(editor.GetSelection().first, editor.GetSelection().second - editor.GetSelection().first);
             cursorPosition = editor.GetSelection().first;
             editor.UnselectText();
         }
-        // cursorPosition = 
         buffer.insert(cursorPosition, clipboard);
         cursorPosition += clipboard.length();
     }
