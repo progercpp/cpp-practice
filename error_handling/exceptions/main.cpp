@@ -100,6 +100,7 @@ void TestParsingExceptions() {
     try {
         // незнакомые символы воспринимаются как имена только если они начинаются с буквы и состоят и букв и чисел
         parser.Tokenize("a = ?", ctx);
+        assert(false);
     } catch (const ParsingException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -110,6 +111,7 @@ void TestParsingExceptions() {
         // нельзя использовать операцию присваивания внутри выражений (expressions)
         // присваивание работает только внутри специальной инструкции (statement) присваивания
         parser.ParseString("5 = 10", ctx);
+        assert(false);
     } catch (const ParsingException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -118,6 +120,7 @@ void TestParsingExceptions() {
 
     try {
         parser.ParseString("5 )", ctx);
+        assert(false);
     } catch (const ParenthesisMismatchException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -127,6 +130,7 @@ void TestParsingExceptions() {
 
     try {
         parser.ParseString("( )", ctx);
+        assert(false);
     } catch (const EmptyParsingResultException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -136,6 +140,7 @@ void TestParsingExceptions() {
 
     try {
         parser.ParseString(R"(\ x 10 -> x)", ctx);
+        assert(false);
     } catch (const ParsingException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -146,6 +151,7 @@ void TestParsingExceptions() {
     try {
         Calculator calc;
         calc.ParseExpressionLine("a = 15");
+        assert(false);
     } catch (const ParsingException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -155,6 +161,7 @@ void TestParsingExceptions() {
     try {
         // будем считать, что лямбда без аргументов не имеет права на жизнь
         parser.ParseString(R"(\ -> 10)", ctx);
+        assert(false);
     } catch (const ParsingException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -168,6 +175,7 @@ void TestEvaluationExceptions() {
 
     try {
         calculator.ProcessString("a = b");
+        assert(false);
     } catch (const UnresolvedReferenceException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -176,6 +184,7 @@ void TestEvaluationExceptions() {
 
     try {
         calculator.ProcessString("a + 5");
+        assert(false);
     } catch (const UnresolvedReferenceException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
@@ -184,6 +193,7 @@ void TestEvaluationExceptions() {
 
     try {
         calculator.ProcessString(R"(( \ x -> x + 5 ) 10 20)");
+        assert(false);
     } catch (const ApplyException& e) {
         assert(dynamic_cast<const Exception*>(&e));
         assert(dynamic_cast<const std::exception*>(&e));
