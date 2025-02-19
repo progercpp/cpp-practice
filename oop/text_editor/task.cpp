@@ -321,7 +321,7 @@ CommandPtr CommandBuilder::build() {
     } else if (type_ == Type::InsertText) {
         result = std::make_shared<InsertTextCommand>(text_);
     } else if (type_ == Type::DeleteText) {
-        result = std::make_shared<DeleteTextCommand>();
+        result = std::make_shared<DeleteTextCommand>(); 
     } else if (type_ == Type::CopyText) {
         result = std::make_shared<CopyTextCommand>();
     } else if (type_ == Type::PasteText) {
